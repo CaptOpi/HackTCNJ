@@ -57,7 +57,27 @@ app.get("/users/getUserTasks/:email/:password", async (req, res) => { //fetch us
       const tasks = user.tasks;
       res.json(tasks);
     }
-});  
+}); 
+app.get("/users/getGoal/:email/:password", async (req, res) => {
+    const {email, password } = req.params;
+    const user = await UserModel.findOne({email, password}).exec()
+    if (!user) {
+        res.status(404).json({message: "User not found."});
+    } else {
+        const goal = user.goal;
+        res.json(goal);
+    }
+});
+app.get("/users/getCompletedGoals/:email/:password", async (req, res) => {
+    const {email, password} = req.params;
+    const user = await UserModel.findOne({email, password}).exec()
+    if (!user) {
+        res.status(404).json({message: "User not found."});
+    } else {
+        const goals = user.completedGoals;
+        res.json(goals);
+    }
+})
 app.get("/users/getUser/:email/:password"), async (req, res) => { //fetch a user via querying email/pass for comparing login
     const {email, password} = req.params;
     const user = UserModel.findOne({email, password}).exec();
@@ -67,6 +87,7 @@ app.get("/users/getUser/:email/:password"), async (req, res) => { //fetch a user
         res.status(200).json({message: "User was found."})
     }
 }
+
 app.listen(5000, () => {
     console.log("SERVER RUNS")
 });
