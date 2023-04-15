@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createUser } from '../api';
 
-function SignUpForm() {
+function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -77,4 +77,4 @@ function SignUpForm() {
   );
 }
 
-export default SignUpForm;
+export default Signup;

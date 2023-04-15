@@ -10,14 +10,7 @@ import Signup from './components/Signup'
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          <Route path = "/" element={<Signup/>}/>
-          <Route path = "/signup" element={<Signup/>}/>
-          {/*<Route path = "/taskplanner" element={<TaskPlanner/>}/>
-          <Route path = "/dashboard" element={<Dashboard/>}/> */}
-        </Routes>
-      </Router>
+      <Signup/>
     </div>
   );
 }
