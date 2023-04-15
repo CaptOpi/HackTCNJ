@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { createUser } from './api'; // assuming the api.js file is in the same directory as this file
+import { getUser } from '../api'; // assuming the api.js file is in the same directory as this file
+import { Link } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -8,7 +9,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const user = await createUser({ email, password });
+      const user = await getUser(email, password);
       console.log(user); // do something with the user data, like redirect to a new page
     } catch (error) {
       console.error(error); // handle errors
@@ -37,6 +38,7 @@ function Login() {
         </label>
         <button type="submit">Login</button>
       </form>
+      <p>Don't have an account? <Link to="/Signup">Sign up</Link></p>
     </div>
   );
 }
