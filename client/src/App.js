@@ -1,16 +1,15 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-//import Login from './components/Login'
-//import TaskPlanner from './components/TaskPlanner'
-import Signup from './components/Signup'
-//import Dashboard from './components/Dashboard'
-//import { useState, useEffect} from 'react'
-//import {createUser} from'./api'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Signup from './components/Signup';
 
 function App() {
   return (
     <div className="App">
-      <Signup/>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Signup />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
