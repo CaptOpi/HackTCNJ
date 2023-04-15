@@ -29,6 +29,7 @@ app.post("/createUser", async (req, res) => {
     await newUser.save()
     res.json(user)
 })
+
 app.listen(5000, () => {
     console.log("SERVER RUNS")
 });
