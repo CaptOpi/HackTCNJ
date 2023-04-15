@@ -78,7 +78,7 @@ app.get("/users/getCompletedGoals/:email/:password", async (req, res) => {
         res.json(goals);
     }
 })
-app.get("/users/getUser/:email/:password"), async (req, res) => { //fetch a user via querying email/pass for comparing login
+app.get("/users/getUser"), async (req, res) => { //fetch a user via querying email/pass for comparing login
     const {email, password} = req.params;
     const user = UserModel.findOne({email, password}).exec();
     if (!user) {
