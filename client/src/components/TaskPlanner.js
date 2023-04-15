@@ -5,6 +5,8 @@ function ToDoList() {
   const [newTask, setNewTask] = useState('');
   const [completedTasks, setCompletedTasks] = useState(0);
   const [goal, setGoal] = useState('');
+  const [showGoalInput, setShowGoalInput] = useState(true);
+  const [goalSubmitted, setGoalSubmitted] = useState(false);
 
   const handleAddTask = () => {
     if (newTask !== '') {
@@ -23,32 +25,61 @@ function ToDoList() {
   const handleResetList = () => {
     setTasks([]);
     setCompletedTasks(0);
+    setGoal('');
+    setShowGoalInput(true);
+    setGoalSubmitted(false);
+  }
+
+  const handleGoalSubmit = (event) => {
+    event.preventDefault();
+    setShowGoalInput(false);
+    setGoalSubmitted(true);
   }
 
   return (
     <div>
-      <h1>To-Do List</h1>
-      <input
-        type="text"
-        value={goal}
-        onChange={(event) => setGoal(event.target.value)}
-        placeholder="Enter your goal for today..."
-      />
-      <ul>
-        {tasks.map((task, index) => (
-          <li key={index}>
-            <input type="checkbox" checked={task.completed} onChange={() => handleTaskComplete(index)} />
-            {task.name}
-          </li>
-        ))}
-      </ul>
-      <input
-        type="text"
-        value={newTask}
-        onChange={(event) => setNewTask(event.target.value)}
-      />
-      <button onClick={handleAddTask} disabled={tasks.length >= 5}>Add Task</button>
-      {completedTasks >= 5 && <button onClick={handleResetList}>Reset List</button>}
+      {goalSubmitted && <h1>{goal}</h1>}
+      {!goalSubmitted && (
+        <form onSubmit={handleGoalSubmit}>
+          {showGoalInput && (
+            <div>
+              <label>
+                Enter your goal for today:
+                <input
+                  type="text"
+                  value={goal}
+                  onChange={(event) => setGoal(event.target.value)}
+                />
+              </label>
+              <button type="submit">Submit</button>
+            </div>
+          )}
+        </form>
+      )}
+      {goalSubmitted && (
+        <div>
+          <ul>
+            {tasks.map((task, index) => (
+              <li key={index}>
+                <input
+                  type="checkbox"
+                  checked={task.completed}
+                  onChange={() => handleTaskComplete(index)}
+                  disabled={task.completed}
+                />
+                {task.name}
+              </li>
+            ))}
+          </ul>
+          <input
+            type="text"
+            value={newTask}
+            onChange={(event) => setNewTask(event.target.value)}
+          />
+          <button onClick={handleAddTask} disabled={tasks.length >= 5}>Add Task</button>
+          {completedTasks >= 5 && <button onClick={handleResetList}>Reset List</button>}
+        </div>
+      )}
     </div>
   );
 }
