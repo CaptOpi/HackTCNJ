@@ -45,11 +45,11 @@ function ToDoList() {
             <div>
               <label>
                 Enter your goal for today:
-                <input
-                  type="text"
-                  value={goal}
-                  onChange={(event) => setGoal(event.target.value)}
-                />
+      <input
+        type="text"
+        value={goal}
+        onChange={(event) => setGoal(event.target.value)}
+      />
               </label>
               <button type="submit">Submit</button>
             </div>
@@ -58,27 +58,27 @@ function ToDoList() {
       )}
       {goalSubmitted && (
         <div>
-          <ul>
-            {tasks.map((task, index) => (
-              <li key={index}>
+      <ul>
+        {tasks.map((task, index) => (
+          <li key={index}>
                 <input
                   type="checkbox"
                   checked={task.completed}
                   onChange={() => handleTaskComplete(index)}
                   disabled={task.completed}
                 />
-                {task.name}
-              </li>
-            ))}
-          </ul>
-          <input
-            type="text"
-            value={newTask}
-            onChange={(event) => setNewTask(event.target.value)}
-          />
-          <button onClick={handleAddTask} disabled={tasks.length >= 5}>Add Task</button>
-          {completedTasks >= 5 && <button onClick={handleResetList}>Reset List</button>}
-        </div>
+            {task.name}
+          </li>
+        ))}
+      </ul>
+      <input
+        type="text"
+        value={newTask}
+        onChange={(event) => setNewTask(event.target.value)}
+      />
+      <button onClick={handleAddTask} disabled={tasks.length >= 5}>Add Task</button>
+      {completedTasks >= 5 && <button onClick={handleResetList}>Reset List</button>}
+    </div>
       )}
     </div>
   );
