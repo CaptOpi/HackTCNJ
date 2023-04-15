@@ -12,7 +12,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path = "/Signup" element = {<Signup />} />
           <Route path="/Login" element={<Login />} />
-          <Route path = "TaskPlanner" element={<TaskPlanner />} />
+          <Route path = "/TaskPlanner" element={<TaskPlanner />} />
         </Routes>
       </BrowserRouter>
     </div>

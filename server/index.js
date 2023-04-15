@@ -78,15 +78,18 @@ app.get("/users/getCompletedGoals/:email/:password", async (req, res) => {
         res.json(goals);
     }
 })
-app.get("/users/getUser"), async (req, res) => { //fetch a user via querying email/pass for comparing login
-    const {email, password} = req.params;
-    const user = UserModel.findOne({email, password}).exec();
+app.get("/users/getUser/:email/:password", async (req, res) => {
+  try {
+    const {email, password } = req.params;
+    const user = await UserModel.findOne({ email, password }).exec();
     if (!user) {
-        res.status(404).json({message: "User not found or password is incorrect."});
-    } else {
-        res.status(200).json({message: "User was found."})
+      return res.status(404).json({message: "User not found or password is incorrect." });
     }
-}
+    res.status(200).json({user});
+  } catch (err) {
+    console.error(err);
+  }
+});
 
 app.listen(5000, () => {
     console.log("SERVER RUNS")

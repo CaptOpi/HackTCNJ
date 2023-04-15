@@ -11,13 +11,12 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const user = { email, password };
-      const response = await getUser(user);//if response status code
+      const response = await getUser(email,password);//if response status code
       if (response.status===200)
       {
         nav('/TaskPlanner');
       }
-      console.log(response); // do something with the user data, like redirect to a new page
+      //console.log(response); // do something with the user data, like redirect to a new page
     } catch (error) {
       console.error(error); // handle errors
     }
