@@ -22,7 +22,7 @@ function Signup() {
       console.log(response);
       // code to redirect the user to their dashboard goes here
     } catch (error) {
-      console.error(error);
+      console.log("hlloe");
       // code to display an error message to the user goes here
     }
   };
