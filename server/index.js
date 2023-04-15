@@ -2,13 +2,11 @@ const express = require("express");
 const app = express();
 const mongoose = require('mongoose');
 const UserModel = require('./models/Users')
-const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const cors = require("cors");
 
 app.use(express.json());
 app.use(cors());
-//app.use('/', createProxyMiddleware({ target: 'http://localhost:5000', changeOrigin: true }));
 
 mongoose.connect(
     "mongodb+srv://mongodb:YKbOaRaybaqzi5HM@cluster0.xjinasp.mongodb.net/?retryWrites=true&w=majority"
@@ -66,13 +64,9 @@ app.get("/users/getUser/:email/:password"), async (req, res) => { //fetch a user
     if (!user) {
         res.status(404).json({message: "User not found or password is incorrect."});
     } else {
-        res.json()
+        res.status(200).json({message: "User was found."})
     }
 }
-app.get("/", (req, res) => {
-    res.send("Hello, world!");
-  });
-
 app.listen(5000, () => {
     console.log("SERVER RUNS")
 });
