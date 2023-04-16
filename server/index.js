@@ -1,16 +1,22 @@
-require('dotenv').config();
+require('dotenv').config({ path: '../.env' });
+const { Configuration, OpenAIApi } = require("openai");
 const axios = require('axios')
 const express = require("express");
 const app = express();
 const mongoose = require('mongoose');
 const UserModel = require('./models/Users')
 const cors = require("cors");
-
+const configuration = new Configuration({
+    apiKey: process.env.OPENAI_KEY,
+});
+const authToken = process.env.twilio_key;
+const accountSid = process.env.account_Sid;
+const openai = new OpenAIApi(configuration);
+const client = require("twilio")(accountSid, authToken);
 app.use(express.json());
 app.use(cors());
 const port = process.env.PORT
 const mongodb_url = process.env.MONGODB_URL;
-const secret_key = process.env.OPENAI_KEY;
 
 mongoose.connect(
     mongodb_url
@@ -206,24 +212,18 @@ app.get("/users/getUser/:email/:password", async (req, res) => {
 });
 app.post("/chatgpt", async (req, res) => {
     const input = req.body.input;
-    const response = await axios.post('https://api.openai.com/v1/engines/davinci-codex/completions', {
-      prompt: input,
-      max_tokens: 50,
-      n: 1,
-      stop: ['\n', '###'],
-      temperature: 0.5,
-      frequency_penalty: 0,
-      presence_penalty: 0,
-      model: 'text-davinci-codex-002'
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' // Replace with your ChatGPT API key
-      }
-    });
-    const chatgptResponse = response.data.choices[0].text;
+    const response = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt: input,
+        temperature: 0.7,
+        max_tokens: 256,
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0,
+      });
+    const chatgptResponse = response.data.choices[0].text
     res.status(200).json({ response: chatgptResponse });
-})
+});
 app.listen(port, () => {
     console.log("SERVER RUNS")
 });
