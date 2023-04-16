@@ -22,24 +22,16 @@ function Dashboard() {
 
     fetchCompletedData();
   }, []);
-
-  const animalImages = {
-    brown: 'brownchar-removebg-preview.png',
-    blue: 'bluechar-removebg-preview.png',
-    white: 'whitechar-removebg-preview.png',
-    yellow: 'yellowchar-removebg-preview.png',
-  };
-
   return (
     <div className="dashboard-container">
       <div className="completed-animals-container">
-        <h2 className="completed-animals-header"></h2>
         <div className="completed-animals-grid">
           {completedAnimals.map((animal) => (
             <div key={animal._id} className="completed-animal">
               <img
                 src={`${animal.name}char-removebg-preview.png`}
                 className="completed-animal-image"
+                alt = ""
                 width="100"
                 height="100"
               />
