@@ -26,18 +26,26 @@ export const getCompletedGoals = async(email, password) => {
     return response;
 }
 export const addTask = async(email, password, task) => {
-    const response = await axios.get(`${API_URL}/users/addTask/${email}/${password}`, task);
+    const response = await axios.put(`${API_URL}/users/addTask/${email}/${password}/${task}`);
     return response;
 }
-export const completeTask = async(email, password, task, complete) => {
-    const response = await axios.get(`${API_URL}/users/completeTask/${email}/${password}/${task}`, complete);
+export const completeTask = async(email, password, task) => {
+    const response = await axios.put(`${API_URL}/users/completeTask/${email}/${password}/${task}`);
     return response;
 }
 export const wipeTasks = async(email, password) => {
-    const response = await axios.get(`${API_URL}/users/wipeTasks/${email}/${password}`);
+    const response = await axios.put(`${API_URL}/users/wipeTasks/${email}/${password}`);
     return response;
 }
 export const updateGoal = async(email, password, goal) => {
-    const response = await axios.get(`${API_URL}/users/updateGoal/${email}/${password}`, goal);
+    const response = await axios.put(`${API_URL}/users/updateGoal/${email}/${password}`);
+    return response;
+}
+export const initializeAnimals = async(email, password) => {
+    const response = await axios.put(`${API_URL}/users/initializeAnimals/${email}/${password}`);
+    return response;
+}
+export const completeAnimal = async(email, password) => {
+    const response = await axios.put(`${API_URL}/users/completeAnimal/${email}/${password}`);
     return response;
 }
