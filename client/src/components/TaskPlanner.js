@@ -13,7 +13,8 @@ function ToDoList() {
   const email = sessionStorage.getItem('email');
   const password = sessionStorage.getItem('password')
   var totalCompleted = 0
-
+  const [chatInput, setChatInput] = useState(''); // new state for chat input
+  const [chatOutput, setChatOutput] = useState(''); 
   const handleAddTask = async () => {
     if (newTask !== '') {
       setTasks([...tasks, { name: newTask, completed: false }]);
@@ -24,7 +25,17 @@ function ToDoList() {
       }
     }
   };
+  const handleChatInput = async (event) => {
+    event.preventDefault();
+    const content = {
+      content: chatInput
+    }
+    //const response = await chat(content);
 
+   // const data = await response.json();
+    //setChatOutput(data.output);
+    setChatInput('');
+  };
   const handleTaskComplete = async (index) => {
     const updatedTasks = [...tasks];
     updatedTasks[index].completed = true;
@@ -198,7 +209,18 @@ function ToDoList() {
               <button className="add-task-button" onClick={handleAddTask} disabled={tasks.length >= 5}>Add Task</button>
               {completedTasks >= 5 && <button class="add-task-button" onClick={handleResetList}>Reset List</button>}
             </div>
-          </div></>
+            
+          </div>      
+          <form onSubmit={handleChatInput}> {/* new form to handle chat input */}
+            <input
+              type="text"
+              placeholder="Enter a prompt for ChatGPT..."
+              value={chatInput}
+              onChange={(event) => setChatInput(event.target.value)}
+            />
+            <button type="submit">Submit</button>
+          </form>
+          {chatOutput && <p>{chatOutput}</p>} {/* new element to display chat output */}</>
       )}
     </div>
   );
