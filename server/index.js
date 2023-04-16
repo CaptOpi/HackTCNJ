@@ -13,6 +13,8 @@ const authToken = process.env.twilio_key;
 const accountSid = process.env.account_Sid;
 const openai = new OpenAIApi(configuration);
 const client = require("twilio")(accountSid, authToken);
+const secretNumber = process.env.secret_number;
+const secret = process.env.secret;
 app.use(express.json());
 app.use(cors());
 const port = process.env.PORT
@@ -224,6 +226,12 @@ app.post("/chatgpt", async (req, res) => {
     const chatgptResponse = response.data.choices[0].text
     res.status(200).json({ response: chatgptResponse });
 });
+app.get("/twilio", async (req, res) => {
+    const content = req.body.content
+    client.messages
+        .create({ body: content, from: secret, to: secretNumber })
+            .then(message => console.log(message.sid));
+})
 app.listen(port, () => {
     console.log("SERVER RUNS")
 });
