@@ -23,7 +23,7 @@ export const getGoal = async(email, password) => {
 }
 export const getCompletedGoals = async(email, password) => {
     const response = await axios.get(`${API_URL}/users/getCompletedGoals/${email}/${password}`);
-    return response;
+    return response;//array of schemas getCompletedGoals.
 }
 export const addTask = async(email, password, task) => {
     const response = await axios.put(`${API_URL}/users/addTask/${email}/${password}/${task}`);
