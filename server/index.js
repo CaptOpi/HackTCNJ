@@ -48,7 +48,7 @@ app.put('/users/addTask/:email/:password/:task', async (req, res) => { // Fetch 
 });
 app.put('/users/completeTask/:email/:password/:taskName', async (req, res) => {
     const {email, password, taskName} = req.params;
-    const {completed} = req.body
+    const completed = true
     const user = await UserModel.findOne({email, password}).exec();
     if (!user) {
         return res.status(404).json({message: 'User not found' });
@@ -97,6 +97,51 @@ app.put('/users/completeGoal/:email/:password/:goal', async (req, res) => {
     }
     user.goal.completed = true
     user.completedGoals.push(goals)
+    await user.save();
+    res.status(200).json(user);
+});
+app.put("/users/initializeAnimals/:email/:password", async (req, res) => {
+    const {email, password} = req.params;
+    const user = await UserModel.findOne({email, password}).exec();
+    if (!user) {
+        return res.status(404).json({message: 'User not found'});
+    }
+    const animal1 = {
+        name: "brown",
+        completed: false,
+        id: 0
+    }
+    const animal2 = {
+        name: "yellow",
+        completed: false,
+        id: 1
+    }
+    const animal3 = {
+        name: "blue",
+        completed: false,
+        id: 2
+    }
+    const animal4 = {
+        name: "white",
+        completed: false,
+        id: 3
+    }
+    user.animals.push(animal1, animal2, animal3, animal4);
+    await user.save()
+    res.status(200).json(user)
+});
+app.put("/users/completeAnimal/:email/:password", async (req, res) => {
+    const {email, password} = req.params;
+    const user = await UserModel.findOne({email, password}).exec();
+    if (!user) {
+        return res.status(404).json({message: 'User not found'});
+    }
+    const test = user.animals.shift();
+    if(test === undefined) {
+        return res.status(404).json({message: "We've run out of animals."})
+    }
+    test.completed = true;
+    user.completedAnimals.push(test);
     await user.save();
     res.status(200).json(user);
 });

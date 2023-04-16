@@ -1,8 +1,27 @@
 const mongoose = require('mongoose')
 
 const TaskSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  completed: { type: Boolean, default: false }
+  name: { 
+    type: String,
+    required: true
+  },
+  completed: { 
+    type: Boolean,
+    default: false }
+});
+const animalsSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  completed: {
+    type: Boolean,
+    default: false
+  },
+  id: {
+    type: Number,
+    require: true
+  }
 });
 const GoalSchema = new mongoose.Schema({
     title: {
@@ -57,7 +76,9 @@ const UserSchema = new mongoose.Schema({
         default: false
       }
     },
-    completedGoals: [GoalSchema]
+    completedGoals: [GoalSchema],
+    animals: [animalsSchema],
+    completedAnimals: [animalsSchema]
 });
 
 const UserModel = mongoose.model("users", UserSchema);
