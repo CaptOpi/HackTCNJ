@@ -12,7 +12,6 @@ function ToDoList() {
     if (newTask !== '') {
       setTasks([...tasks, { name: newTask, completed: false }]);
       setNewTask('');
-      const response = await 
     }
   };
 
