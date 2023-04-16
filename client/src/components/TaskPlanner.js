@@ -210,7 +210,8 @@ function ToDoList() {
               {completedTasks >= 5 && <button class="add-task-button" onClick={handleResetList}>Reset List</button>}
             </div>
             
-          </div>      
+          </div>  
+          <div className="chat">    
           <form onSubmit={handleChatInput}> {/* new form to handle chat input */}
             <input
               type="text"
@@ -220,7 +221,12 @@ function ToDoList() {
             />
             <button type="submit">Submit</button>
           </form>
-          {chatOutput && <p>{chatOutput}</p>} {/* new element to display chat output */}</>
+          </div>
+          {chatOutput && (
+    <div className="output-container">
+      <p className="output-text">{chatOutput}</p>
+    </div>
+  )} {/* new element to display chat output */}</>
       )}
     </div>
   );
