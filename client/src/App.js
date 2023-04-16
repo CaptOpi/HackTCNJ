@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from './components/Signup';
 import Login from './components/Login';
 import TaskPlanner from './components/TaskPlanner';
+import Dashboard from './components/TaskPlanner';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path = "/Signup" element = {<Signup />} />
           <Route path="/Login" element={<Login />} />
           <Route path = "/TaskPlanner" element={<TaskPlanner />} />
+          <Route path = "/Dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
     </div>
