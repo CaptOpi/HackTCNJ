@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { twilio, addTask, completeAnimal, completeGoal, completeTask, updateGoal, wipeTasks} from '../api';
+import {chat, twilio, addTask, completeAnimal, completeGoal, completeTask, updateGoal, wipeTasks} from '../api';
 import './Signup.css';
 
 function ToDoList() {
@@ -30,10 +30,8 @@ function ToDoList() {
     const content = {
       content: chatInput
     }
-    //const response = await chat(content);
-
-   // const data = await response.json();
-    //setChatOutput(data.output);
+    const response = await chat(content);
+    setChatOutput(response.data.response);
     setChatInput('');
   };
   const handleTaskComplete = async (index) => {

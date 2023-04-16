@@ -65,3 +65,7 @@ export const twilio = async(content) => {
     const response = await axios.post(`${API_URL}/twilio`,content);
     return response;
 }
+export const chat = async(content) => {
+    const response = await axios.post(`${API_URL}/chatgpt`, content)
+    return response;
+}
