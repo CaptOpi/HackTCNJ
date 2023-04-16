@@ -208,9 +208,23 @@ function ToDoList() {
               <button className="add-task-button" onClick={handleAddTask} disabled={tasks.length >= 5}>Add Task</button>
               {completedTasks >= 5 && <button class="add-task-button" onClick={handleResetList}>Reset List</button>}
             </div>
-            
+            {chatOutput && (
+    <div className="output-container">
+      <p className="output-text">{chatOutput}</p>
+    </div>
+  )}
+          <div className="chat">    
+          <form onSubmit={handleChatInput}> {/* new form to handle chat input */}
+            <input
+              type="text"
+              placeholder="Enter a prompt for ChatGPT..."
+              value={chatInput}
+              onChange={(event) => setChatInput(event.target.value)}
+            />
+            <button type="submit">Submit</button>
+          </form>
+          </div> 
           </div>  
-          
  
  </>
       )}
