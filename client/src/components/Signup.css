@@ -112,9 +112,7 @@ div.mt-3 a {
   }
   .checkbox-container {
     background-color: #fff;
-    padding: 20px;
     max-width: 350px;
-    margin: 50px auto;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
     animation: slideIn 1.0s ease-in-out;
@@ -274,6 +272,41 @@ div.mt-3 a {
     cursor: pointer;
     font-size: 25px;
 }
+#chat {
+  background-color: #fff;
+  max-width: 350px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  animation: slideIn 1.0s ease-in-out;
+  opacity: 0.87;
+  font-size: 25px;
+  overflow: auto;
+  word-wrap: break-word;
+  margin-right: 20px;
+  z-index: 3;
+  display: flex; 
+  align-items: center;
+}
+
+.output-container {
+  background-color: #fff;
+  padding: 20px;
+  max-width: 350px;
+  max-height: 500px;
+  margin: 20px auto;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  animation: slideIn 1.0s ease-in-out;
+  opacity: 0.87;
+  font-size: 25px;
+  margin-right: 20px;
+  z-index: 1;
+}
+
+.output-text {
+  font-size: 20px;
+}
+
 #db-btn {
     position: absolute;
     top: 10px;
@@ -285,38 +318,3 @@ div.mt-3 a {
     cursor: pointer;
     font-size: 25px;
 }
-.chat {
-    background-color: #fff;
-    padding: 20px;
-    max-width: 350px;
-    margin: 20px auto;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
-    animation: slideIn 1.0s ease-in-out;
-    opacity: 0.87;
-    font-size: 25px;
-    overflow: auto;
-    word-wrap: break-word;
-    margin-right: 20px;
-    margin-bottom: 50px;
-  }
-  
-  .output-container {
-    background-color: #fff;
-    padding: 20px;
-    max-width: 350px;
-    margin: 20px auto;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
-    animation: slideIn 1.0s ease-in-out;
-    opacity: 0.87;
-    font-size: 25px;
-    margin-right: 20px;
-    margin-bottom: 50px;
-    z-index: 1;
-  }
-  
-  .output-text {
-    font-size: 20px;
-    margin: 0;
-  }
