@@ -209,6 +209,11 @@ function ToDoList() {
             </div>
             
           </div>  
+          {chatOutput && (
+    <div className="output-container">
+      <p className="output-text">{chatOutput}</p>
+    </div>
+  )}
           <div className="chat">    
           <form onSubmit={handleChatInput}> {/* new form to handle chat input */}
             <input
@@ -220,11 +225,7 @@ function ToDoList() {
             <button type="submit">Submit</button>
           </form>
           </div>
-          {chatOutput && (
-    <div className="output-container">
-      <p className="output-text">{chatOutput}</p>
-    </div>
-  )} {/* new element to display chat output */}</>
+ {/* new element to display chat output */}</>
       )}
     </div>
   );
