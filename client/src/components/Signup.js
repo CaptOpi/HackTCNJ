@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { createUser } from '../api';
 import { useNavigate } from 'react-router-dom';
 import './Signup.css';
+import { setEmailAddress, setPass } from './auth';
 function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -19,6 +20,8 @@ function Signup() {
 
     try {
       const user = { name, email, password };
+      setEmailAddress(email);
+      setPass(password);
       const response = await createUser(user);
       if (response.status===200)
       {

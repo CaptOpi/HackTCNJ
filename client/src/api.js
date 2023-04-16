@@ -38,7 +38,11 @@ export const wipeTasks = async(email, password) => {
     return response;
 }
 export const updateGoal = async(email, password, goal) => {
-    const response = await axios.put(`${API_URL}/users/updateGoal/${email}/${password}`);
+    const response = await axios.put(`${API_URL}/users/updateGoal/${email}/${password}/${goal}`);
+    return response;
+}
+export const completeGoal = async(email, password, goal) => {
+    const response = await axios.put(`${API_URL}/users/completeGoal/${email}/${password}/${goal}`);
     return response;
 }
 export const initializeAnimals = async(email, password) => {

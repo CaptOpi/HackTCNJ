@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-
+import { addTask, completeGoal, completeTask, updateGoal, wipeTasks } from '../api';
+import { getEmail, getPass} from './auth'
 function ToDoList() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
@@ -8,32 +9,51 @@ function ToDoList() {
   const [showGoalInput, setShowGoalInput] = useState(true);
   const [goalSubmitted, setGoalSubmitted] = useState(false);
 
-  const handleAddTask = () => {
+  const handleAddTask = async () => {
     if (newTask !== '') {
       setTasks([...tasks, { name: newTask, completed: false }]);
       setNewTask('');
+      const response = await addTask(getEmail(), getPass(), newTask);
+      if(!(response.status === 200)) {
+        console.error(response)
+      }
     }
   };
 
-  const handleTaskComplete = (index) => {
+  const handleTaskComplete = async (index) => {
     const updatedTasks = [...tasks];
     updatedTasks[index].completed = true;
     setTasks(updatedTasks);
     setCompletedTasks(completedTasks + 1);
+    const response = await completeTask(getEmail(),getPass(), updatedTasks[index].name);
+    if(!(response.status === 200)) {
+      console.error(response)
+    } 
   };
 
-  const handleResetList = () => {
+  const handleResetList = async () => {
     setTasks([]);
     setCompletedTasks(0);
     setGoal('');
     setShowGoalInput(true);
     setGoalSubmitted(false);
+    const response = await wipeTasks(getEmail(),getPass());
+    if(!(response.status === 200)) {
+      console.error(response)
+    }
+    const responseSecond = await completeGoal(getEmail(),getPass(),goal);
+    if(!(responseSecond.status === 200)) {
+      console.error(responseSecond)
+    }
   }
-
-  const handleGoalSubmit = (event) => {
+  const handleGoalSubmit = async (event) => {
     event.preventDefault();
     setShowGoalInput(false);
     setGoalSubmitted(true);
+    const response = await updateGoal(getEmail(),getPass(),goal);
+    if(!(response.status === 200)) {
+      console.error(response)
+    } 
   }
 
   return (
