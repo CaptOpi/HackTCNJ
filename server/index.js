@@ -1,15 +1,19 @@
+require('dotenv').config();
+const axios = require('axios')
 const express = require("express");
 const app = express();
 const mongoose = require('mongoose');
 const UserModel = require('./models/Users')
-
 const cors = require("cors");
 
 app.use(express.json());
 app.use(cors());
+const port = process.env.PORT
+const mongodb_url = process.env.MONGODB_URL;
+const secret_key = process.env.OPENAI_KEY;
 
 mongoose.connect(
-    "mongodb+srv://mongodb:YKbOaRaybaqzi5HM@cluster0.xjinasp.mongodb.net/?retryWrites=true&w=majority"
+    mongodb_url
 );
 
 app.get("/users/getUsers", (req, res) => { // get a list of all defined users
@@ -200,7 +204,26 @@ app.get("/users/getUser/:email/:password", async (req, res) => {
     }
     res.status(200).json({user});
 });
-
-app.listen(5000, () => {
+app.post("/chatgpt", async (req, res) => {
+    const input = req.body.input;
+    const response = await axios.post('https://api.openai.com/v1/engines/davinci-codex/completions', {
+      prompt: input,
+      max_tokens: 50,
+      n: 1,
+      stop: ['\n', '###'],
+      temperature: 0.5,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+      model: 'text-davinci-codex-002'
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' // Replace with your ChatGPT API key
+      }
+    });
+    const chatgptResponse = response.data.choices[0].text;
+    res.status(200).json({ response: chatgptResponse });
+})
+app.listen(port, () => {
     console.log("SERVER RUNS")
 });
