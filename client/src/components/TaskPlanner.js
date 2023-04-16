@@ -60,6 +60,44 @@ function ToDoList() {
     } 
   }
 
+  const imageMap = {
+    eggunhatched1: '/unhatchedegg-removebg-preview.png',
+    eggunhatched: '/unhatchedegg-removebg-preview.png',
+    eggmidhatch: '/midhatchegg-removebg-preview.png',
+    eggmidhatch2: '/midhatchegg-removebg-preview.png',
+    eggnearhatch: '/nearhatchicon-removebg-preview.png',
+    brown: '/brownchar-removebg-preview.png',
+    yellow:'/yellowchar-removebg-preview.png',
+    blue:'/bluechar-removebg-preview.png',
+    white:'/whitechar-removebg-preview.png'
+
+  };
+  const renderImages = (completedTasks, completeGoal) => {
+    const totalCompleted = completedTasks + completeGoal.length;
+    switch (totalCompleted) {
+      case 0:
+        return <img src={imageMap['eggunhatched']} alt="eggunhatched" />;
+      case 1:
+        return <img src={imageMap['eggunhatched']} alt="eggunhatched" />;
+      case 2:
+        return <img src={imageMap['eggmidhatch']} alt="eggmidhatch" />;
+      case 3:
+        return <img src={imageMap['eggmidhatch']} alt="eggmidhatch" />;
+      case 4:
+        return <img src={imageMap['eggnearhatch']} alt="eggnearhatch" />;
+      case 5:
+        return <img src={imageMap['brown']} alt="brown" />;
+      case 6:
+        return <img src={imageMap['yellow']} alt="yellow" />;
+      case 7:
+        return <img src={imageMap['blue']} alt="blue" />;
+      case 8:
+        return <img src={imageMap['white']} alt="white" />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div>
       {goalSubmitted && <h1>{goal}</h1>}
@@ -83,6 +121,7 @@ function ToDoList() {
       {goalSubmitted && (
         <div>
       <ul>
+      {renderImages(completedTasks)}
         {tasks.map((task, index) => (
           <li key={index}>
                 <input
@@ -102,6 +141,7 @@ function ToDoList() {
       />
       <button onClick={handleAddTask} disabled={tasks.length >= 5}>Add Task</button>
       {completedTasks >= 5 && <button onClick={handleResetList}>Reset List</button>}
+
     </div>
       )}
     </div>
