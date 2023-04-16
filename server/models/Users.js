@@ -9,7 +9,8 @@ const GoalSchema = new mongoose.Schema({
       type: String,
       required: true,
       minlength: 1,
-      maxlength: 40
+      maxlength: 40,
+      unique: true
     },
     completed: {
       type: Boolean,
@@ -48,7 +49,8 @@ const UserSchema = new mongoose.Schema({
       title: {
         type: String,
         minlength: 1,
-        maxlength: 40
+        maxlength: 40,
+        default: "No Goal"
       },
       completed: {
         type: Boolean,

@@ -32,21 +32,73 @@ app.post("/users/createUser", async (req, res) => { //create user with name,emai
       res.status(500).json({message: "Failed to create user", error: error });
     }
 });
-app.put('/users/updateUser/:email/:password', async (req, res) => { // Fetch and update user tasks/goal using user id
-    try {
-      const userId = req.params.userId;
-      const user = await UserModel.findById(userId);
-      if (!user) {
+app.put('/users/addTask/:email/:password/:task', async (req, res) => { // Fetch and update user tasks using email/pass
+    const {email, password, task} = req.params;
+    const user = await UserModel.findOne({email, password}).exec();
+    if (!user) {
         return res.status(404).json({message: 'User not found' });
-      }
-      const { tasks, goal } = req.body;
-      user.tasks = tasks;
-      user.goal = goal;
-      await user.save();
-      res.status(200).json(user);
-    } catch (error) {
-      res.status(500).json({message: 'Internal server error' });
     }
+    const tasks = {
+        name: task,
+        completed: false
+    }
+    user.tasks.push(tasks);
+    await user.save();
+    res.status(200).json(user);
+});
+app.put('/users/completeTask/:email/:password/:taskName', async (req, res) => {
+    const {email, password, taskName} = req.params;
+    const {completed} = req.body
+    const user = await UserModel.findOne({email, password}).exec();
+    if (!user) {
+        return res.status(404).json({message: 'User not found' });
+    }
+    const task = user.tasks.find(task => task.name === taskName);
+    task.completed = completed
+    await user.save();
+    res.status(200).json(user);
+})
+app.put('/users/wipeTasks/:email/:password', async (req, res) => {
+    const {email, password} = req.params;
+    const user = await UserModel.findOne({email, password}).exec();
+    if (!user) {
+        return res.status(404).json({message: 'User not found' });
+    }
+    user.tasks = []
+    await user.save();
+    res.status(200).json(user);
+});
+app.put('/users/updateGoal/:email/:password/:goal', async (req, res) => {
+    const {email, password, goal} = req.params;
+    const user = await UserModel.findOne({email, password}).exec();
+    if (!user) {
+        return res.status(404).json({message: 'User not found'});
+    }
+    const goals = {
+        title: goal,
+        completed: false
+    }
+    user.goal = goals;
+    await user.save();
+    res.status(200).json(user);
+});
+app.put('/users/completeGoal/:email/:password/:goal', async (req, res) => {
+    const {email, password, goal} = req.params;
+    const user = await UserModel.findOne({email, password}).exec();
+    if (!user) {
+        return res.status(404).json({message: 'User not found'});
+    }
+    const goals = {
+        title: goal,
+        completed: true
+    }
+    if(user.completedGoals.some(goal => goal.title === goals.title)) {
+        return res.status(400).json({message: 'Duplicate goals.'}); 
+    }
+    user.goal.completed = true
+    user.completedGoals.push(goals)
+    await user.save();
+    res.status(200).json(user);
 });
 app.get("/users/getUserTasks/:email/:password", async (req, res) => { //fetch users querying using username/password
     const {email, password } = req.params;
@@ -70,14 +122,14 @@ app.get("/users/getGoal/:email/:password", async (req, res) => {
 });
 app.get("/users/getCompletedGoals/:email/:password", async (req, res) => {
     const {email, password} = req.params;
-    const user = await UserModel.findOne({email, password}).exec()
+    const user = await UserModel.findOne({email, password}).exec();
     if (!user) {
         res.status(404).json({message: "User not found."});
     } else {
         const goals = user.completedGoals;
         res.status(200).json(goals);
     }
-})
+});
 app.get("/users/getUser/:email/:password", async (req, res) => {
     const { email, password } = req.params;
     const user = await UserModel.findOne({ email, password }).exec();
