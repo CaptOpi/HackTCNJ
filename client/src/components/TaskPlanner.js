@@ -209,23 +209,9 @@ function ToDoList() {
             </div>
             
           </div>  
-          {chatOutput && (
-    <div className="output-container">
-      <p className="output-text">{chatOutput}</p>
-    </div>
-  )}
-          <div className="chat">    
-          <form onSubmit={handleChatInput}> {/* new form to handle chat input */}
-            <input
-              type="text"
-              placeholder="Enter a prompt for ChatGPT..."
-              value={chatInput}
-              onChange={(event) => setChatInput(event.target.value)}
-            />
-            <button type="submit">Submit</button>
-          </form>
-          </div>
- {/* new element to display chat output */}</>
+          
+ 
+ </>
       )}
     </div>
   );
