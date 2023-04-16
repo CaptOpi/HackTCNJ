@@ -182,13 +182,13 @@ function ToDoList() {
                 </li>
               ))}
             </ul>
-            <div class="add-task-container">
+            <div className="add-task-container">
 
               <input
                 type="text"
                 value={newTask}
                 onChange={(event) => setNewTask(event.target.value)} />
-              <button class="add-task-button" onClick={handleAddTask} disabled={tasks.length >= 5}>Add Task</button>
+              <button className="add-task-button" onClick={handleAddTask} disabled={tasks.length >= 5}>Add Task</button>
               {completedTasks >= 5 && <button class="add-task-button" onClick={handleResetList}>Reset List</button>}
             </div>
           </div></>
