@@ -48,13 +48,12 @@ app.put('/users/addTask/:email/:password/:task', async (req, res) => { // Fetch 
 });
 app.put('/users/completeTask/:email/:password/:taskName', async (req, res) => {
     const {email, password, taskName} = req.params;
-    const completed = true
     const user = await UserModel.findOne({email, password}).exec();
     if (!user) {
         return res.status(404).json({message: 'User not found' });
     }
     const task = user.tasks.find(task => task.name === taskName);
-    task.completed = completed
+    task.completed = true
     await user.save();
     res.status(200).json(user);
 })

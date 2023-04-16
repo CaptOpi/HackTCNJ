@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { getUser } from '../api'; // assuming the api.js file is in the same directory as this file
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { setEmailAddress,setPass } from './auth';
 import './Signup.css';
 
 function Login() {
@@ -12,6 +13,8 @@ function Login() {
     e.preventDefault();
     try {
       const response = await getUser(email,password);//if response status code
+      setEmailAddress(email);
+      setPass(password);
       if (response.status===200)
       {
         nav('/TaskPlanner');
