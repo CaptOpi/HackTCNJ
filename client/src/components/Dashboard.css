@@ -1,0 +1,56 @@
+.dashboard-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 20px;
+    height: 100vh;
+}
+.completed-goals-container, .completed-animals-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.completed-goals-header, .completed-animals-header {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+.completed-goals-list, .completed-animals-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.completed-goals-list-item, .completed-animals-list-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    width: 250px;
+    text-align: left;
+    font-size: 18px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+}
+.completed-goals-container {
+    margin-right: 20px;
+}
+.completed-animal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.completed-animal-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+.completed-animal-name {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin-bottom: 3px;
+    width: 200px;
+    font-size: 18px;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+}
