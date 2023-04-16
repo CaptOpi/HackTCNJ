@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { createUser } from '../api';
+import { createUser, initializeAnimals } from '../api';
 import { useNavigate } from 'react-router-dom';
 import './Signup.css';
-import { setEmailAddress, setPass } from './auth';
+import { setEmailAddress, setPass, getEmail,getPass } from './auth';
 function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -23,6 +23,10 @@ function Signup() {
       setEmailAddress(email);
       setPass(password);
       const response = await createUser(user);
+      const response2 = await initializeAnimals(getEmail(),getPass());
+      if(!(response.status)===200) {
+        console.error(response2);
+      }
       if (response.status===200)
       {
         nav('/TaskPlanner');

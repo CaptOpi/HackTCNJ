@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addTask, completeGoal, completeTask, updateGoal, wipeTasks } from '../api';
+import { addTask, completeAnimal, completeGoal, completeTask, updateGoal, wipeTasks } from '../api';
 import { getEmail, getPass} from './auth'
 function ToDoList() {
   const [tasks, setTasks] = useState([]);
@@ -44,6 +44,10 @@ function ToDoList() {
     const responseSecond = await completeGoal(getEmail(),getPass(),goal);
     if(!(responseSecond.status === 200)) {
       console.error(responseSecond)
+    }
+    const responseThird = await completeAnimal(getEmail(),getPass());
+    if (!(responseThird.status === 200)) {
+      console.error(responseThird);
     }
   }
   const handleGoalSubmit = async (event) => {

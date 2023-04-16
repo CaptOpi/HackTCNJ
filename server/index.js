@@ -144,6 +144,24 @@ app.put("/users/completeAnimal/:email/:password", async (req, res) => {
     await user.save();
     res.status(200).json(user);
 });
+app.get("/users/getAnimals/:email/:password", async (req, res) => {
+    const {email, password} = req.params;
+    const user = await UserModel.findOne({email, password}).exec();
+    if (!user) {
+        return res.status(404).json({message: 'User not found'});
+    }
+    const animals = user.animals;
+    res.status(200).json(animals);
+});
+app.get("/users/getCompletedAnimals/:email/:password", async (req, res) =>{
+    const {email, password} = req.params;
+    const user = await UserModel.findOne({email, password}).exec();
+    if (!user) {
+        return res.status(404).json({message: 'User not found'});
+    }
+    const completedAnimals = user.completedAnimals;
+    res.status(200).json(completedAnimals);
+});
 app.get("/users/getUserTasks/:email/:password", async (req, res) => { //fetch users querying using username/password
     const {email, password } = req.params;
     const user = await UserModel.findOne({email, password }).exec();
