@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createUser } from '../api';
-
+import { useNavigate } from 'react-router-dom';
+import './Signup.css';
 function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
+  const nav = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -19,6 +20,10 @@ function Signup() {
     try {
       const user = { name, email, password };
       const response = await createUser(user);
+      if (response.status===200)
+      {
+        nav('/TaskPlanner');
+      }
       console.log(response);
       // code to redirect the user to their dashboard goes here
     } catch (error) {
@@ -27,10 +32,13 @@ function Signup() {
   };
 
   return (
+    <div className="Signup">
+    <h1>Sign Up</h1> 
     <form onSubmit={handleSubmit}>
-      <div>
+      <div className="form-group">
         <label htmlFor="name">Name:</label>
         <input
+          className="form-control"
           type="text"
           id="name"
           name="name"
@@ -39,9 +47,10 @@ function Signup() {
           required
         />
       </div>
-      <div>
+      <div className="form-group">
         <label htmlFor="email">Email:</label>
         <input
+          className="form-control"
           type="email"
           id="email"
           name="email"
@@ -50,9 +59,10 @@ function Signup() {
           required
         />
       </div>
-      <div>
+      <div className="form-group">
         <label htmlFor="password">Password:</label>
         <input
+          className="form-control"
           type="password"
           id="password"
           name="password"
@@ -61,9 +71,10 @@ function Signup() {
           required
         />
       </div>
-      <div>
+      <div className="form-group">
         <label htmlFor="confirmPassword">Confirm Password:</label>
         <input
+          className="form-control"
           type="password"
           id="confirmPassword"
           name="confirmPassword"
@@ -72,11 +83,12 @@ function Signup() {
           required
         />
       </div>
-      <button type="submit">Sign Up</button>
-      <div>
+      <button type="submit" className="btn btn-primary">Sign Up</button>
+      <div className="mt-3">
         Already have an account? <Link to="/Login">Log in</Link>
       </div>
     </form>
+    </div>
   );
 }
 

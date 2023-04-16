@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { getUser } from '../api'; // assuming the api.js file is in the same directory as this file
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import './Signup.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -24,27 +24,30 @@ function Login() {
 
   return (
     <div className="login">
-      <h1>Login</h1>
+       <h1>Login</h1> 
       <form onSubmit={handleLogin}>
         <label>
-          Email:
+          {/* Email: */}
           <input
             type="email"
             value={email}
+            placeholder='Email Address'
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
         <label>
-          Password:
+          {/* Password: */}
           <input
             type="password"
             value={password}
+            placeholder='Password'
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
         <button type="submit">Login</button>
+        <p>Don't have an account? <Link to="/Signup">Sign up</Link></p>
       </form>
-      <p>Don't have an account? <Link to="/Signup">Sign up</Link></p>
+
     </div>
   );
 }
