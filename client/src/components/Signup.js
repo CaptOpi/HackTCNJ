@@ -1,34 +1,36 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { createUser, initializeAnimals } from '../api';
+import { createUser, initializeAnimals, twilio} from '../api';
 import { useNavigate } from 'react-router-dom';
 import './Signup.css';
-import { setEmailAddress, setPass, getEmail,getPass } from './auth';
 function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const nav = useNavigate();
+  const resets = sessionStorage.setItem('resets', 0)
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     if (password !== confirmPassword) {
       console.log('Passwords do not match');
       return;
     }
-
     try {
       const user = { name, email, password };
-      setEmailAddress(email);
-      setPass(password);
-      const response = await createUser(user);
-      const response2 = await initializeAnimals(getEmail(),getPass());
-      if(!(response.status)===200) {
-        console.error(response2);
+      sessionStorage.setItem('email', email);
+      sessionStorage.setItem('password', password);
+      const contents = {
+        contents: `Hello! Thank you for signing up at HatchHabits!`
       }
+      const response = await createUser(user);
       if (response.status===200)
       {
+        const response2 = await initializeAnimals(email,password);
+        if(!(response2.status)===200) {
+          console.error(response2);
+        }
+        const response3 = twilio(contents);
         nav('/TaskPlanner');
       }
       console.log(response);

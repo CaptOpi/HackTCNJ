@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { getEmail, getPass} from './auth'
 import { getCompletedGoals,getCompletedAnimals} from '../api'
 import './Dashboard.css';
 
@@ -9,8 +8,8 @@ function Dashboard() {
   useEffect(() => {
     async function fetchCompletedData() {
       try {
-        const email = getEmail();
-        const password = getPass();
+        const email = sessionStorage.getItem('email')
+        const password = sessionStorage.getItem('password')
         const data = await getCompletedGoals(email, password);
         const animals = await getCompletedAnimals(email, password);
         setCompletedGoals(data.data);

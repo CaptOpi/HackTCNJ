@@ -61,3 +61,7 @@ export const getCompletedAnimals = async(email, password) => {
     const response = await axios.get(`${API_URL}/users/getCompletedAnimals/${email}/${password}`);
     return response;
 }
+export const twilio = async(content) => {
+    const response = await axios.post(`${API_URL}/twilio`,content);
+    return response;
+}

@@ -226,8 +226,8 @@ app.post("/chatgpt", async (req, res) => {
     const chatgptResponse = response.data.choices[0].text
     res.status(200).json({ response: chatgptResponse });
 });
-app.get("/twilio", async (req, res) => {
-    const content = req.body.content
+app.post("/twilio", async (req, res) => {
+    const content = req.body.contents
     client.messages
         .create({ body: content, from: secret, to: secretNumber })
             .then(message => console.log(message.sid));

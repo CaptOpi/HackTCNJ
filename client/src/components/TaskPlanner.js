@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { addTask, completeAnimal, completeGoal, completeTask, updateGoal, wipeTasks} from '../api';
-import { getEmail, getPass} from './auth'
 import './Signup.css';
 
 function ToDoList() {
@@ -10,14 +9,16 @@ function ToDoList() {
   const [goal, setGoal] = useState('');
   const [showGoalInput, setShowGoalInput] = useState(true);
   const [goalSubmitted, setGoalSubmitted] = useState(false);
-  const [resetvalue, setResetValue]= useState(0);
+  const resets = sessionStorage.getItem('resets')
+  const email = sessionStorage.getItem('email');
+  const password = sessionStorage.getItem('password')
   var totalCompleted = 0
 
   const handleAddTask = async () => {
     if (newTask !== '') {
       setTasks([...tasks, { name: newTask, completed: false }]);
       setNewTask('');
-      const response = await addTask(getEmail(), getPass(), newTask);
+      const response = await addTask(email, password, newTask);
       if(!(response.status === 200)) {
         console.error(response)
       }
@@ -29,7 +30,7 @@ function ToDoList() {
     updatedTasks[index].completed = true;
     setTasks(updatedTasks);
     setCompletedTasks(completedTasks + 1);
-    const response = await completeTask(getEmail(),getPass(), updatedTasks[index].name);
+    const response = await completeTask(email,password, updatedTasks[index].name);
     if(!(response.status === 200)) {
       console.error(response)
     } 
@@ -38,19 +39,19 @@ function ToDoList() {
   const handleResetList = async () => {
     setTasks([]);
     setCompletedTasks(0);
-    setResetValue(resetvalue+1);
+    sessionStorage.setItem('resets', parseInt(resets) + 1)
     setGoal('');
     setShowGoalInput(true);
     setGoalSubmitted(false);
-    const response = await wipeTasks(getEmail(),getPass());
+    const response = await wipeTasks(email,password);
     if(!(response.status === 200)) {
       console.error(response)
     }
-    const responseSecond = await completeGoal(getEmail(),getPass(),goal);
+    const responseSecond = await completeGoal(email,password,goal);
     if(!(responseSecond.status === 200)) {
       console.error(responseSecond)
     }
-    const responseThird = await completeAnimal(getEmail(),getPass());
+    const responseThird = await completeAnimal(email,password);
     if (!(responseThird.status === 200)) {
       console.error(responseThird);
     }
@@ -59,7 +60,7 @@ function ToDoList() {
     event.preventDefault();
     setShowGoalInput(false);
     setGoalSubmitted(true);
-    const response = await updateGoal(getEmail(),getPass(),goal);
+    const response = await updateGoal(email,password,goal);
     if(!(response.status === 200)) {
       console.error(response)
     } 
@@ -77,8 +78,8 @@ function ToDoList() {
     white: '/whitechar-removebg-preview.png'
   };
 
-  const renderImages = (completedTasks, completeGoal)=>{
-    totalCompleted = completedTasks + resetvalue;
+  const renderImages = (completedTasks, resets)=>{
+    totalCompleted = completedTasks + parseInt(resets);
     switch (completedTasks) {
       case 0:
         return <img src={imageMap['eggunhatched']} alt="eggunhatched" />;
@@ -131,7 +132,7 @@ function ToDoList() {
           )}
         </form>
       )}
-            {renderImages(completedTasks,resetvalue)}
+            {renderImages(completedTasks,resets)}
       {goalSubmitted && (
          <>
          <div className="checkbox-container2">

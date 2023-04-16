@@ -28,8 +28,7 @@ const GoalSchema = new mongoose.Schema({
       type: String,
       required: true,
       minlength: 1,
-      maxlength: 40,
-      unique: true
+      maxlength: 40
     },
     completed: {
       type: Boolean,
