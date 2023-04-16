@@ -23,34 +23,33 @@ function Dashboard() {
     fetchCompletedData();
   }, []);
   return (
-    <div className="dashboard-container">
-      <div className="completed-animals-container">
-        <div className="completed-animals-grid">
-          {completedAnimals.map((animal) => (
-            <div key={animal._id} className="completed-animal">
-              <img
-                src={`${animal.name}char-removebg-preview.png`}
-                className="completed-animal-image"
-                alt = ""
-                width="100"
-                height="100"
-              />
-              <div className="completed-animal-name" style={{backgroundColor: completedAnimals.includes(animal.name) ? 'light-red' : '#ADFF2F'}}>{animal.name}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="completed-goals-container">
-        <h2 className="completed-goals-header">Completed Goals</h2>
-        <ul className="completed-goals-list">
-          {completedGoals.map((goal) => (
-            <li key={goal._id} className="completed-goals-list-item">
-              {goal.title}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+    <><a href="/Login" id="logout-btn">Logout</a><a href="/TaskPlanner" id="db-btn">Task Planner</a><div className="dashboard-container">
+          <div className="completed-animals-container">
+              <div className="completed-animals-grid">
+                  {completedAnimals.map((animal) => (
+                      <div key={animal._id} className="completed-animal">
+                          <img
+                              src={`${animal.name}char-removebg-preview.png`}
+                              className="completed-animal-image"
+                              alt=""
+                              width="100"
+                              height="100" />
+                          <div className="completed-animal-name" style={{ backgroundColor: completedAnimals.includes(animal.name) ? 'light-red' : '#ADFF2F' }}>{animal.name}</div>
+                      </div>
+                  ))}
+              </div>
+          </div>
+          <div className="completed-goals-container">
+              <h2 className="completed-goals-header">Completed Goals</h2>
+              <ul className="completed-goals-list">
+                  {completedGoals.map((goal) => (
+                      <li key={goal._id} className="completed-goals-list-item">
+                          {goal.title}
+                      </li>
+                  ))}
+              </ul>
+          </div>
+      </div></>
   );
 }
 

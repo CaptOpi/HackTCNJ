@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { addTask, completeAnimal, completeGoal, completeTask, updateGoal, wipeTasks} from '../api';
 import { getEmail, getPass} from './auth'
+import './Signup.css';
+
 function ToDoList() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
@@ -109,6 +111,8 @@ function ToDoList() {
 
   return (
     <div>
+      <a href="/Login" id="logout-btn">Logout</a>
+      <a href="/Dashboard" id="db-btn">Dashboard</a>
       {goalSubmitted && <h1>{goal}</h1>}
       {!goalSubmitted && (
         <form onSubmit={handleGoalSubmit}>
@@ -127,31 +131,66 @@ function ToDoList() {
           )}
         </form>
       )}
+            {renderImages(completedTasks,resetvalue)}
       {goalSubmitted && (
-        <div>
-      <ul>
-      {renderImages(completedTasks,resetvalue)}
-        {tasks.map((task, index) => (
-          <li key={index}>
-                <input
-                  type="checkbox"
-                  checked={task.completed}
-                  onChange={() => handleTaskComplete(index)}
-                  disabled={task.completed}
-                />
-            {task.name}
-          </li>
-        ))}
-      </ul>
-      <input
-        type="text"
-        value={newTask}
-        onChange={(event) => setNewTask(event.target.value)}
-      />
-      <button onClick={handleAddTask} disabled={tasks.length >= 5}>Add Task</button>
-      {completedTasks >= 5 && <button onClick={handleResetList}>Reset List</button>}
+         <>
+         <div className="checkbox-container2">
+          <ul>
+            <li>
+           <h2>Get Better at Math</h2> 
+              <label>
+                <input type="checkbox" className="checkbox-input2" defaultChecked={true} />
+                <span className="checkbox-label">Read 3 Chapters from textbook</span>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" className="checkbox-input2" />
+                <span className="checkbox-label">Do 50 exercise problems</span>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" className="checkbox-input2" />
+                <span className="checkbox-label">Attend 3 office hours</span>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" className="checkbox-input2" defaultChecked={true} />
+                <span className="checkbox-label">Finish all homework on time</span>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" className="checkbox-input2" />
+                <span className="checkbox-label">Watch 5 khan Academy videos</span>
+              </label>
+            </li>
+          </ul></div><div className="checkbox-container">
+            <ul>
+              {tasks.map((task, index) => (
+                <li key={index}>
+                  <input
+                    type="checkbox"
+                    className="checkbox-input"
+                    checked={task.completed}
+                    onChange={() => handleTaskComplete(index)}
+                    disabled={task.completed} />
+                  {task.name}
+                </li>
+              ))}
+            </ul>
+            <div class="add-task-container">
 
-    </div>
+              <input
+                type="text"
+                value={newTask}
+                onChange={(event) => setNewTask(event.target.value)} />
+              <button class="add-task-button" onClick={handleAddTask} disabled={tasks.length >= 5}>Add Task</button>
+              {completedTasks >= 5 && <button class="add-task-button" onClick={handleResetList}>Reset List</button>}
+            </div>
+          </div></>
       )}
     </div>
   );

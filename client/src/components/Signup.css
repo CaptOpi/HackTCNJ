@@ -110,3 +110,178 @@ div.mt-3 a {
     color:#fff;
     font-size:50px;
   }
+  .checkbox-container {
+    background-color: #fff;
+    padding: 20px;
+    max-width: 350px;
+    margin: 50px auto;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    animation: slideIn 1.0s ease-in-out;
+    opacity: 0.87;
+    font-size: 25px;
+    overflow: auto;
+    word-wrap: break-word;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  
+  .checkbox-input {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    -webkit-appearance: none;
+    outline: none;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  
+  .checkbox-input:checked {
+    background-color: #ccc;
+    border-color: #ccc;
+  }
+  
+  .checkbox-input::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #166fe5;
+    transition: transform 0.2s ease-out;
+    font-size: 16px;
+  }
+  
+  .checkbox-input:checked::before {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  
+
+  ul li label .task-name {
+    font-size: 18px;
+  }
+  .add-task-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .add-task-container input {
+    flex: 1;
+    height: 40px;
+    font-size: 16px;
+    padding: 0 10px;
+    margin-right: 12px;
+    width: 150px
+  }
+  
+  .add-task-button {
+    height: 50px;
+    font-size:20px;
+    background-color: #166fe5;
+    color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .add-task-button:hover {
+    background-color: #ccc;
+  }
+  .checkbox-container2 {
+    background-color: #fff;
+    padding: 20px;
+    max-width: 350px;
+    margin: 50px auto;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    animation: slideIn 1.0s ease-in-out;
+    opacity: 0.87;
+    font-size: 25px;
+    overflow: auto;
+    word-wrap: break-word;
+    margin-left: 20px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    margin-bottom: 10px;
+  }
+  
+  .checkbox-input2 {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    -webkit-appearance: none;
+    outline: none;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .checkbox-input2:checked {
+    background-color: #ccc;
+    border-color: #ccc;
+  }
+  
+  .checkbox-input2::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ccc;
+    transition: transform 0.2s ease-out;
+    font-size: 16px;
+  }
+  
+  .checkbox-input2:checked::before {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  #logout-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 25px;
+}
+#db-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 25px;
+}
