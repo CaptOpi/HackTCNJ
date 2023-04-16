@@ -21,7 +21,8 @@ function Signup() {
       sessionStorage.setItem('email', email);
       sessionStorage.setItem('password', password);
       const contents = {
-        contents: `Hello! Thank you for signing up at HatchHabits!`
+        contents: `Hello! Thank you for signing up at HatchHabits!`,
+        mediaUrl: 'https://media.tenor.com/nu9XqB4pQGsAAAAi/line-sticker-thank-you-sticker.gif'
       }
       const response = await createUser(user);
       if (response.status===200)

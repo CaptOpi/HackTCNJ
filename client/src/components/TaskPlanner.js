@@ -53,7 +53,8 @@ function ToDoList() {
     setShowGoalInput(true);
     setGoalSubmitted(false);
     const content = {
-      contents: "Aww! You just grew a new hatch! Check it out now!"
+      contents: "Aww! You just grew a new hatch! Check it out now!",
+      mediaUrl: 'https://media.tenor.com/WavPeEHiCQ8AAAAC/egg-hatch.gif'
     }
     const response = await wipeTasks(email,password);
     if(!(response.status === 200)) {
@@ -67,7 +68,7 @@ function ToDoList() {
     if (!(responseThird.status === 200)) {
       console.error(responseThird);
     }
-    const responseFourth = await twilio(content);
+    const responseFourth = twilio(content);
     if (!(responseFourth.status === 200)) {
       console.error(responseFourth);
     }

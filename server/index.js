@@ -223,8 +223,14 @@ app.post("/chatgpt", async (req, res) => {
 });
 app.post("/twilio", async (req, res) => {
     const content = req.body.contents
+    const mediaUrl = req.body.mediaUrl
     client.messages
-        .create({ body: content, from: secret, to: secretNumber })
+        .create({
+            body: content, 
+            from: secret, 
+            to: secretNumber,
+            mediaUrl: [mediaUrl],
+        })
             .then(message => console.log(message.sid));
 })
 app.listen(port, () => {
