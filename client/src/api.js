@@ -58,6 +58,6 @@ export const getAnimals = async(email, password) => {
     return response;
 }
 export const getCompletedAnimals = async(email, password) => {
-    const response = await axios.put(`${API_URL}/users/getCompletedAnimals/${email}/${password}`);
+    const response = await axios.get(`${API_URL}/users/getCompletedAnimals/${email}/${password}`);
     return response;
 }

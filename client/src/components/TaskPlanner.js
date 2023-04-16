@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addTask, completeAnimal, completeGoal, completeTask, updateGoal, wipeTasks } from '../api';
+import { addTask, completeAnimal, completeGoal, completeTask, updateGoal, wipeTasks} from '../api';
 import { getEmail, getPass} from './auth'
 function ToDoList() {
   const [tasks, setTasks] = useState([]);
@@ -8,6 +8,8 @@ function ToDoList() {
   const [goal, setGoal] = useState('');
   const [showGoalInput, setShowGoalInput] = useState(true);
   const [goalSubmitted, setGoalSubmitted] = useState(false);
+  const [resetvalue, setResetValue]= useState(0);
+  var totalCompleted = 0
 
   const handleAddTask = async () => {
     if (newTask !== '') {
@@ -34,6 +36,7 @@ function ToDoList() {
   const handleResetList = async () => {
     setTasks([]);
     setCompletedTasks(0);
+    setResetValue(resetvalue+1);
     setGoal('');
     setShowGoalInput(true);
     setGoalSubmitted(false);
@@ -71,10 +74,9 @@ function ToDoList() {
     blue: '/bluechar-removebg-preview.png',
     white: '/whitechar-removebg-preview.png'
   };
-  
-  const renderImages = (completedTasks, completeGoal) => {
-    const totalCompleted = completedTasks + completeGoal.length;
-  
+
+  const renderImages = (completedTasks, completeGoal)=>{
+    totalCompleted = completedTasks + resetvalue;
     switch (completedTasks) {
       case 0:
         return <img src={imageMap['eggunhatched']} alt="eggunhatched" />;
@@ -128,7 +130,7 @@ function ToDoList() {
       {goalSubmitted && (
         <div>
       <ul>
-      {renderImages(completedTasks)}
+      {renderImages(completedTasks,resetvalue)}
         {tasks.map((task, index) => (
           <li key={index}>
                 <input
