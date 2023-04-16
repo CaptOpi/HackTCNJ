@@ -21,7 +21,6 @@ function Login() {
         console.log(response1)
         sessionStorage.setItem('resets', 0)
       }
-      console.log(response1)
       if (response.status===200)
       {
         nav('/TaskPlanner');

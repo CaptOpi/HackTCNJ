@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addTask, completeAnimal, completeGoal, completeTask, updateGoal, wipeTasks} from '../api';
+import { twilio, addTask, completeAnimal, completeGoal, completeTask, updateGoal, wipeTasks} from '../api';
 import './Signup.css';
 
 function ToDoList() {
@@ -43,6 +43,9 @@ function ToDoList() {
     setGoal('');
     setShowGoalInput(true);
     setGoalSubmitted(false);
+    const content = {
+      contents: "Aww! You just grew a new hatch! Check it out now!"
+    }
     const response = await wipeTasks(email,password);
     if(!(response.status === 200)) {
       console.error(response)
@@ -54,6 +57,10 @@ function ToDoList() {
     const responseThird = await completeAnimal(email,password);
     if (!(responseThird.status === 200)) {
       console.error(responseThird);
+    }
+    const responseFourth = await twilio(content);
+    if (!(responseFourth.status === 200)) {
+      console.error(responseFourth);
     }
   }
   const handleGoalSubmit = async (event) => {

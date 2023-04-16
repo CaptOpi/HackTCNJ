@@ -213,17 +213,12 @@ app.get("/users/getUser/:email/:password", async (req, res) => {
     res.status(200).json({user});
 });
 app.post("/chatgpt", async (req, res) => {
-    const input = req.body.input;
-    const response = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: input,
-        temperature: 0.7,
-        max_tokens: 256,
-        top_p: 1,
-        frequency_penalty: 0,
-        presence_penalty: 0,
+    const content = req.body.content;
+    const completion = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        messages: [{role: "user", content: content}],
       });
-    const chatgptResponse = response.data.choices[0].text
+    const chatgptResponse = (completion.data.choices[0].message.content);
     res.status(200).json({ response: chatgptResponse });
 });
 app.post("/twilio", async (req, res) => {
