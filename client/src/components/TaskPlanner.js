@@ -67,14 +67,15 @@ function ToDoList() {
     eggmidhatch2: '/midhatchegg-removebg-preview.png',
     eggnearhatch: '/nearhatchicon-removebg-preview.png',
     brown: '/brownchar-removebg-preview.png',
-    yellow:'/yellowchar-removebg-preview.png',
-    blue:'/bluechar-removebg-preview.png',
-    white:'/whitechar-removebg-preview.png'
-
+    yellow: '/yellowchar-removebg-preview.png',
+    blue: '/bluechar-removebg-preview.png',
+    white: '/whitechar-removebg-preview.png'
   };
+  
   const renderImages = (completedTasks, completeGoal) => {
     const totalCompleted = completedTasks + completeGoal.length;
-    switch (totalCompleted) {
+  
+    switch (completedTasks) {
       case 0:
         return <img src={imageMap['eggunhatched']} alt="eggunhatched" />;
       case 1:
@@ -85,6 +86,11 @@ function ToDoList() {
         return <img src={imageMap['eggmidhatch']} alt="eggmidhatch" />;
       case 4:
         return <img src={imageMap['eggnearhatch']} alt="eggnearhatch" />;
+      default:
+        break;
+    }
+  
+    switch (totalCompleted) {
       case 5:
         return <img src={imageMap['brown']} alt="brown" />;
       case 6:
@@ -97,6 +103,7 @@ function ToDoList() {
         return null;
     }
   };
+  
 
   return (
     <div>
