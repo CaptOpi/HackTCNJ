@@ -1,8 +1,8 @@
 # HackTCNJ
-
+https://devpost.com/software/habithatch-wr3z7n?
 Our website allows you to create and manage your daily tasks while collecting adorable animal characters. The more tasks you complete, the more animals you unlock! And here's the best part - you can invite your friends to join in on the fun from their own accounts. Collaborate with them to complete tasks together and earn even more animals.
 
-Whether trying to stay on top of your work tasks or accomplish personal goals, our website is a fun and engaging way to stay motivated and track your progress. So what are you waiting for? Sign up today and start collecting those animals while achieving your goals with the help of your friends!
+Whether trying to stay on top of your work tasks or accomplish personal goals, our website is a fun and engaging way to stay motivated and track your progress. So what are you waiting for? Sign up today and start collecting those animals while achieving your goals with the help of your friends! 
 
 ## Inspiration
 Humans are social creatures, and we thrive on connection and collaboration. When it comes to completing tasks, having someone to hold us accountable and provide encouragement can make a world of difference. Working with friends on daily tasks can help us stay motivated, focused, and engaged.
